@@ -59,6 +59,7 @@ if what == 5:
             f.write('\n%...\n\n')
         f.write('\stop' + level[i])
         f.close()
+    print("Creating ", count, "file(s) ", level[3])
     for j in range(count):
         filename = prefix[3] + proj + '-' + str(j) + suffix
         f = open(filename,  'w')

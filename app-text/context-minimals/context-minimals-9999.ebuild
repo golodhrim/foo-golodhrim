@@ -44,7 +44,7 @@ src_install() {
 	ln -s ${D}/etc/${PN}/web2c/texmfcnf.lua ${D}/opt/${PN}/tex/texmf/web2c/texmfcnf.lua
 	chmod -R 777 ${D}/opt/${PN}/tex/texmf-cache
 	cp ${FILESDIR}/makeproject.py3 ${D}/usr/bin/makeproject.py3
-	ln -s ${D}/usr/bin/makeproject.py3 $/usr/bin/makeproject
+	ln -s ${D}/usr/bin/makeproject.py3 ${D}/usr/bin/makeproject
 	chmod -R 777 ${D}/usr/bin/makeproject.py3 ${D} /usr/bin/makeproject
 }
 
