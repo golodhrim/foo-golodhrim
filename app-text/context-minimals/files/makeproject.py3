@@ -1,13 +1,28 @@
 #!/usr/bin/env python3
-import os.path
-currentdir = os.curdir
+# makeproject.py3 automatic generation of ConTeXt-Project-Structure
+# Copyright (C) 2010 Martin 'golodhrim' Scholz
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
+#import os.path
+#currentdir = os.curdir
+print("makeproject.py3 Copyright (C) 2010 Martin 'golodhrim' Scholz\nThis program comes with ABSOLUTELY NO WARRANTY; for details visit <http://www.gnu.org/licenses>")
 print("Make ConTeXt project -- 2010-05-23")
 
 level = ['environment', 'project', 'product', 'component']
 prefix = ['env_', 'project_', 'prd_', 'c_']
 suffix = '.tex'
-inisuffix = '.ini'
+#inisuffix = '.ini'
 
 def input_level(prompt1="What do you want to create? (Enter 1 for environment, 2 for project, 3 for product, 4 for component or 5 for all): "):
     while True:
@@ -59,7 +74,7 @@ if what == 5:
             f.write('\n%...\n\n')
         f.write('\stop' + level[i])
         f.close()
-    print("Creating ", count, "file(s) ", level[3])
+    print("Creating ", count, "file(s)",  level[3])
     for j in range(count):
         filename = prefix[3] + proj + '-' + str(j) + suffix
         f = open(filename,  'w')
