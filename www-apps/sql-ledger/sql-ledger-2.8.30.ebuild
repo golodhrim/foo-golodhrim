@@ -18,8 +18,7 @@ HOMEPAGE="http://www.sql-ledger.com/"
 #However that is the next step.
 
 LICENSE="GPL"
-KEYWORDS="x86 ppc"
-#KEYWORDS="~alpha ~amd64 ~hppa ~ppc ~sparc ~x86"
+KEYWORDS="x86 ~alpha ~amd64 ~hppa ~ppc ~sparc ~x86"
 IUSE=""
 
 RDEPEND="${DEPEND}
@@ -28,9 +27,10 @@ RDEPEND="${DEPEND}
 	>=dev-db/postgresql-7.1
 	dev-perl/DBI
 	dev-perl/DBD-Pg
-	www-servers/apache
-	app-text/tetex"
-#tetex is needed if you wish to print added as depend.
+	app-text/texlive[dvipdfm,extra,graphics,humanities,png,pstricks,science]
+	app-text/texlive-latex
+	app-text/texlive-latexrecommended"
+#	www-servers/apache excluded as any webserver would be ok...
 
 S="${WORKDIR}/sql-ledger"
 
