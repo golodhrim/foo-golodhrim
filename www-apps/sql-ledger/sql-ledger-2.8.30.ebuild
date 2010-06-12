@@ -24,12 +24,12 @@ IUSE=""
 RDEPEND="${DEPEND}
 	dev-perl/libwww-perl
 	>=dev-lang/perl-5
-	>=dev-db/postgresql-7.1
+	>=virtual/postgresql-server-8.0
 	dev-perl/DBI
 	dev-perl/DBD-Pg
-	app-text/texlive[dvipdfm,extra,graphics,humanities,png,pstricks,science]
-	app-text/texlive-latex
-	app-text/texlive-latexrecommended"
+	>=app-text/texlive-2009
+	>=dev-texlive/texlive-latex-2009
+	>=dev-texlive/texlive-latexrecommended-2009"
 #	www-servers/apache excluded as any webserver would be ok...
 
 S="${WORKDIR}/sql-ledger"
