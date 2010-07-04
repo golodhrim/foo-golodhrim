@@ -22,7 +22,7 @@ IUSE="openoffice2pdf"
 # Note: We have a dependency on Postgresql here although Postgresql could run
 # on another server, actually.
 DEPEND=""
-RDEPEND=">=dev-db/postgresql-8
+RDEPEND=">=dev-db/postgresql-server-8
 		dev-lang/perl
 		dev-perl/DBI
 		dev-perl/DBD-Pg
