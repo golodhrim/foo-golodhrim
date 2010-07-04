@@ -1,0 +1,93 @@
+
+The following steps explain how to setup Lx-Office ERP using a local Postgresql
+server for user authentication and data storage. For less common settings
+(e.g. using a remote Postgresql server or using LDAP for authentication) please
+read INSTALL.txt file in /usr/share/doc/${PN}-${PVR})
+
+1. Add to following lines to /var/lib/postgresql/data/postgresql.conf:
+
+listen_addresses = 'localhost'
+default_with_oids = on
+
+2. In /var/lib/postgresql/data/pg_hba.conf, make sure only password authenticated
+access is allowed for databases 'lxerp_auth' and 'lxerp':
+
+local   all         lxerp_auth                        password
+host    all         lxerp_auth    127.0.0.1/32        password
+host    all         lxerp_auth    ::1/128             password
+local   all         lxerp                             password
+host    all         lxerp         127.0.0.1/32        password
+host    all         lxerp         ::1/128             password
+
+3. Create database user 'lxoffice' (which will only be used by Lx-Office itself):
+
+# su - postgres
+$ createuser -d -P -a -e lxoffice
+
+(Note: This creates a new superuser. If you want to use a less powerful user
+with Lx-Office, please read the documentation.)
+
+4. Add the following configuration settings to your apache config:
+
+AddHandler cgi-script .pl
+Alias /lx-erp/ ${VHOST_ROOT}/${VHOST_APPDIR}/
+<Directory ${VHOST_ROOT}/${VHOST_APPDIR}>
+        Options ExecCGI Includes FollowSymlinks
+</Directory>
+<Directory ${VHOST_ROOT}/${VHOST_APPDIR}/users>
+        Order Deny,Allow
+        Deny from All
+</Directory>
+
+5. In ${VHOST_ROOT}/htdocs/${VHOST_APPDIR}/config/authentication.pl, set a password
+for the Lx-Office administrator and configure the database connection settings:
+
+$self->{admin_password} = 'myadminpassword'
+
+$self->{DB_config} = {
+  'host'     => 'localhost',
+  'port'     => 5432,
+  'db'       => 'lxerp_auth',
+  'user'     => 'lxoffice',
+  'password' => 'the password you entered in step 3.',
+};
+
+6. Reload Apache and restart Postgresql:
+
+# /etc/init.d/apache2 reload
+# /etc/init.d/postgresql restart
+
+7. Create required databases, tables and a user:
+
+1) Open http://${VHOST_HOSTNAME}/${VHOST_APPDIR}/admin.pl in a browser
+2) Log in using the Lx-Office admin password you defined in authentication.pl
+   in step 5.
+3) Follow the instructions (i.e. click on "Datenbank anlegen"
+   and on "Tabellen anlegen")
+4) Click on "Datenbankadministration"
+4.1) Click on "Datenbank anlegen"
+4.2) In field "Datenbank anlegen" enter: lxerp
+4.3) Select a 'Kontenplan' in drop-down menu "Kontenplan anlegen"
+4.4) Click on "Weiter", and if successful, on "Weiter" again
+5) (Optional) Click on "Datenbankadministration"
+5.1) (Optional) Click on "Datenbank aktualisieren"
+6) (Optional) Create a new group by clicking on "Gruppen bearbeiten"
+7) Click on "Benutzer erfassen"
+7.1) In field "Datenbank" enter: lxerp
+7.2) In field "Benutzer" enter: lxoffice
+7.3) In field "Passwort" enter: (the password you entered in step 3.)
+7.4) Enter the rest of the user properties
+7.5) Click on "Speichern" to create the specified user
+7.6) Don't mind if there's an error message, just browse to the admin
+     page again at http://${VHOST_HOSTNAME}/${VHOST_APPDIR}/admin.pl
+8) Click on "Gruppen bearbeiten" and add the user you created to the group
+   you (optionally) created in step 6) or to the group "Vollzugriff".
+   In order to do this, select the group in the list and click on
+   "Bearbeiten". In the next screen, select the user in the list and
+   click on "Zu Gruppe hinzufuegen". Then click on "Zurueck" (2x).
+
+8. Congrats! You may now start using Lx-Office! Just browse to
+
+http://${VHOST_HOSTNAME}/${VHOST_APPDIR}/login.pl
+
+and log in as the user you created in step 7)
