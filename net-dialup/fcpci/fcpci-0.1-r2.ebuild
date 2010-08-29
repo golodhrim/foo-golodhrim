@@ -41,11 +41,11 @@ src_unpack() {
 
 	cd "${S}"
 	epatch $(sed -n "s|^Patch[${PAT}]:\s*\(.*\)|../\1|p" ../${PN}.spec)
-	epatch "${FILESDIR}"/fritz-config.diff
+	#epatch "${FILESDIR}"/fritz-config.diff
 	epatch "${FILESDIR}"/fritz-tools.diff
-	epatch "${FILESDIR}"/fritz_driver_init.diff
-	epatch "${FILESDIR}"/fritz_irq.diff
-	epatch "${FILESDIR}"/fritz_pci.diff
+	#epatch "${FILESDIR}"/fritz_driver_init.diff
+	#epatch "${FILESDIR}"/fritz_irq.diff
+	#epatch "${FILESDIR}"/fritz_pci.diff
 	epatch "${FILESDIR}"/strncpy.diff
 	epatch "${FILESDIR}"/tools2.diff
 	epatch "${FILESDIR}"/ctr_reset.diff
