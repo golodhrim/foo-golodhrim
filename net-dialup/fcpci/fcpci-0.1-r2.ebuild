@@ -47,7 +47,7 @@ src_unpack() {
 	#epatch "${FILESDIR}"/fritz_irq.diff
 	#epatch "${FILESDIR}"/fritz_pci.diff
 	epatch "${FILESDIR}"/strncpy.diff
-	epatch "${FILESDIR}"/tools2.diff
+	#epatch "${FILESDIR}"/tools2.diff
 	epatch "${FILESDIR}"/ctr_reset.diff
 	convert_to_m src/Makefile
 
