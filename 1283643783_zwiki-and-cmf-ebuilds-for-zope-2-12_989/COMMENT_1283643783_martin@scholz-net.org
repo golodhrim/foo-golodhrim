@@ -1,1 +1,0 @@
-adding ebuilds for zwiki and cmf for zope version 2.12 still open is usage of zprod-manage add for cmf.
