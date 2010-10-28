@@ -1,5 +1,5 @@
 ---
-title: Frog and Owl / Open-SP @ GitHub 
+title: golodhrim / foo-golodhrim @ GitHub
 layout: default
 author: Martin Scholz (martin@scholz-net.org)
 tecass: Martin Scholz (martin@scholz-net.org)
