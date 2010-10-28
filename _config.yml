@@ -1,0 +1,17 @@
+safe:           false
+auto:           true
+server:         false
+server_port:    4000
+
+source:         .
+destination:    ./_site
+plugins:        ./_plugins
+
+future:         true
+lsi:            false
+pygments:       true
+makrdown:       rdiscount
+permalink:      date
+
+rdiscount:
+  extensions:   []
