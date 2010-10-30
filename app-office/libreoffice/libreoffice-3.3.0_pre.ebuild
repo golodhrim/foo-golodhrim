@@ -134,8 +134,7 @@ CDEPEND="${SDEPEND}
 	  app-text/libwpd
 	  app-text/libwps
 	  app-text/poppler[xpdf-headers]
-	  dev-libs/boost-program_options
-	  dev-libs/boost-thread
+	  dev-util/boost-build
 	  dev-libs/expat
 	>=dev-libs/icu-4.2.1
 	  dev-libs/libxml2
@@ -172,7 +171,6 @@ DEPEND="${CDEPEND}
 	app-arch/unzip
 	app-arch/zip
 	dev-lang/perl
-	dev-libs/boost-headers
 	dev-perl/Archive-Zip
 	dev-util/cppunit
 	dev-util/intltool
