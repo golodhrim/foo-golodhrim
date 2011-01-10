@@ -6,7 +6,7 @@ EAPI="2"
 
 DESCRIPTION="protects hosts from brute force attacks against ssh"
 HOMEPAGE="http://sshguard.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${PN}-1.5rc4.tar.bz2"
+SRC_URI="mirror://sourceforge/${PN}/${PN}-1.5rc4.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"
@@ -19,6 +19,10 @@ DEPEND="${CDEPEND}
 	sys-devel/flex"
 RDEPEND="${CDEPEND}
 	virtual/logger"
+
+src_prepare() {
+	mv ${WORKDIR}/${PN}-1.5rc4 ${WORKDIR}/${P}
+}
 
 src_configure() {
 	local myconf
