@@ -1,0 +1,80 @@
+--- yapet-0.7.orig/yapet/mainwindow.h	Sun Sep 19 14:57:05 2010
++++ yapet-0.7/yapet/mainwindow.h	Sat Sep 25 18:10:02 2010
+@@ -71,6 +71,10 @@
+ 
+         bool usefsecurity;
+ 
++	//! Used to indicate handle_signal() that the user wishes to quit from
++	//! the lock screen
++	volatile bool do_quit;
++
+         inline MainWindow (const MainWindow&) {}
+         inline const MainWindow& operator= (const MainWindow&) {
+             return *this;
+@@ -99,7 +103,7 @@
+         void searchTerm();
+         void searchNext();
+         bool quit();
+-        void lockScreen() const throw (YAPET::UI::UIException);
++        void lockScreen() throw (YAPET::UI::UIException);
+         void changePassword() throw (YAPET::UI::UIException);
+     public:
+         MainWindow (unsigned int timeout, bool fsecurity) throw (YAPET::UI::UIException);
+--- yapet-0.7.orig/yapet/mainwindow.cc	Sun Sep 19 14:57:05 2010
++++ yapet-0.7/yapet/mainwindow.cc	Sat Sep 25 18:08:32 2010
+@@ -886,7 +886,7 @@
+ }
+ 
+ void
+-MainWindow::lockScreen() const throw (YAPET::UI::UIException) {
++MainWindow::lockScreen() throw (YAPET::UI::UIException) {
+     if (key == NULL) return;
+ 
+     int ch;
+@@ -925,7 +925,6 @@
+ #endif
+         PasswordDialog* pwdia = NULL;
+         YAPET::Key* testkey = NULL;
+-	bool wants_quit = false;
+ 
+         try {
+ 	    // Flush pending input
+@@ -941,7 +940,7 @@
+ 					show_quit);
+             pwdia->run();
+             testkey = pwdia->getKey();
+-	    wants_quit = pwdia->wantsQuit();
++	    do_quit = pwdia->wantsQuit();
+             delete pwdia;
+         } catch (YAPET::UI::UIException&) {
+             if (pwdia != NULL)
+@@ -957,7 +956,7 @@
+         if (testkey == NULL) {
+             delwin (lockwin);
+ 	    // Do we have to quit
+-	    if (wants_quit) {
++	    if (do_quit) {
+ 		ungetch('q');
+ 		return;
+ 	    }
+@@ -1102,7 +1101,8 @@
+         key (NULL),
+         file (NULL),
+         locktimeout (timeout),
+-        usefsecurity (fsecurity) {
++									 usefsecurity (fsecurity),
++									 do_quit (false) {
+     locktimeout = locktimeout < 10 ? 10 : locktimeout;
+     createWindow();
+ }
+@@ -1331,6 +1331,10 @@
+         lockScreen();
+         ::refresh();
+         YAPET::UI::BaseWindow::refreshAll();
++	if (do_quit) {
++	    flushinp();
++	    ungetch('q');
++	}
+     }
+ }
+ #endif // defined(HAVE_SIGACTION) && defined(HAVE_SIGNAL_H)
