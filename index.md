@@ -10,7 +10,7 @@ contact: Martin Scholz (info@scholz-net.org)
 
 ********
 
-This is the Page for golodhrim\'s overlay for funtoo.
+This is the Page for golodhrim overlay for funtoo.
 
 This is the filestructure of the page:
 
