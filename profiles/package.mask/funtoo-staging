@@ -1,0 +1,9 @@
+# PLEASE KEEP MOST RECENT MASKS ON TOP, REVERSE CHRONO ORDER
+
+# Martin Scholz <golodhrim@funtoo.org> (3 March 2011)
+# Masked for testing
+>=sys-apps/sandbox-2.5
+
+# Martin Scholz <golodhrim@funtoo.org> (3 March 2011)
+# Masked for testing
+>=net-misc/dhcpcd-5.2.11
