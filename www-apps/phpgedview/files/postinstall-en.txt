@@ -1,0 +1,2 @@
+Please note that the index directory has been moved for you to
+${VHOST_ROOT}/${PN}-${PVR}/index
